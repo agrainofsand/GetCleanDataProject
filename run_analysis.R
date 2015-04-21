@@ -37,4 +37,16 @@ run_data <- cbind(subject, activity, means, std)
 ## Use the descriptive activity names to name the activity in the run_data set
 run_data1 <- merge(x=activity_labels, y=run_data, by.x="V1", by.y="activity")
 run_data1 <- select(run_data1, -V1)
-colnames(run_data1)[1] <- "Activity"
+colnames(run_data1)[1] <- "activity"
+
+## The run_data1 table already has the appropriate descriptive variable names.
+## Here, I'm just cleaning up the column names a bit to remove the "()"
+## Refer to the CodeBook for a detailed explanation of each descriptive variable
+names(run_data1) <- gsub("\\()","",names(run_data1))
+
+## Create a second, independent tidy data set with the average of each variable for each activity and each subject
+grouped <- run_data1 %>% group_by(subject, activity) %>%
+    summarise_each(funs(mean))
+
+## Write the grouped table to a TidyData.txt file
+write.table(grouped, file = "TidyData.txt", row.name=FALSE)
