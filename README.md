@@ -26,6 +26,4 @@ The sensor signals (accelerometer and gyroscope) were pre-processed by applying 
 
 *Please refer to the CodeBook which describes the variable names in more detail.*
 
-## Loading the data
-When loading the dataset into R
 
