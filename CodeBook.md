@@ -108,3 +108,13 @@ tBodyGyroJerkMean
 The complete list of variables of each feature vector is available in 'features.txt'
 
 ##Data Transformations
+1. The data sets x_train.txt and x_test.txt were combined together using rbind() to create the data frame train_test.
+2. train_test was given the column headings from the data set features.txt.
+3. Mean (mean) and standard deviation measurements (std) were pulled from train_test using the function grep() and dumped into two tables, means and std.
+4. The data sets subject_train.txt and subject_test.txt were combined together using rbind() to create the data frame subject. The data set was given the column heading "subject".
+5. The data sets y_train.txt and y_test.txt were combined together using rbind() to create the data frame activity. The data set was given the column heading "activity".
+6. The data frames subject, activity, means, and std were merged together into a single data set using cbind() to create the data set run_data.
+7. Descriptive active names were given name the activity column in the run_data set via a merge on the run_data$activity column with the activity_labels$V2 column. The resultant data set was named run_data1. run_data1 was cleaned up to remove the column V1 using select() and the V2 column renamed to "activity" using colnames().
+8. Tidied up the descriptive variable names by removing "()" where it occurred in the column headings by using gsub().
+9. Created a data frame grouped, by doing an average of the means and standard deviation across each subject and activity using group_by(), summarise_each().
+10. Wrote the grouped table to a TidyData.txt file.
